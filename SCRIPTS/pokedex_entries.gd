@@ -1,5 +1,24 @@
 extends Node
 
+func get_random_dex_entry(pokemon_name: String) -> String:
+	var entries = []
+	
+	if pokemon_name.to_lower() == "all":
+		# Combine entries from all Pokémon
+		for entry in pokedex_entries.values():
+			entries += entry.dex_info
+	else:
+		# Get entries for the specified Pokémon
+		var pokemon_entry = pokedex_entries.get(pokemon_name.to_lower())
+		if pokemon_entry:
+			entries = pokemon_entry.dex_info
+
+	# Return a random entry
+	if entries.size() > 0:
+		return entries[randi() % entries.size()]
+	else:
+		return ""  # Return an empty string or handle the case where no entries are found
+
 var pokedex_entries = {
 	"bulbasaur": {
 		"pokemon_name": "bulbasaur",

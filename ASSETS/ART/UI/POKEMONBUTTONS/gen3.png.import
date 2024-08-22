@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bb46ig5kew4kq"
-path="res://.godot/imported/charizard-megay.png-3c72838636842f1fe731e7abe573513e.ctex"
+uid="uid://beg0vhm18jpm2"
+path="res://.godot/imported/gen3.png-bebecf22a87a36b62c837fe4328acd59.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ASSETS/ART/UI/charizard-megay.png"
-dest_files=["res://.godot/imported/charizard-megay.png-3c72838636842f1fe731e7abe573513e.ctex"]
+source_file="res://ASSETS/ART/UI/POKEMONBUTTONS/gen3.png"
+dest_files=["res://.godot/imported/gen3.png-bebecf22a87a36b62c837fe4328acd59.ctex"]
 
 [params]
 

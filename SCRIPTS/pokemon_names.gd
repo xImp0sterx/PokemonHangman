@@ -1,26 +1,24 @@
 extends Node
 
-# This function selects a single random Pokémon from a specific generation without duplicates
-func get_random_pokemon(generation: String) -> String:
-	if pokemon_names.has(generation):
-		var names = pokemon_names[generation]
-		if names.size() > 0:
-			return names[randi() % names.size()]
-	return ""
+func get_random_pokemon(gen: String) -> String:
+	if gen == "all":
+		var all_pokemon = []
+		for gen_key in pokemon_names.keys():
+			# Exclude 'gen8' and 'gen9' keys
+			if gen_key != "gen8" and gen_key != "gen9":
+				all_pokemon.append_array(pokemon_names[gen_key])
+		if all_pokemon.size() > 0:
+			return all_pokemon[randi() % all_pokemon.size()]
+		else:
+			print("No Pokémon available to select.")
+			return ""
+	else:
+		if gen in pokemon_names:
+			return pokemon_names[gen][randi() % pokemon_names[gen].size()]
+		else:
+			print("Specified generation not found.")
+			return ""
 
-# This function combines all Pokémon from all generations into a single list
-func get_all_pokemon() -> Array:
-	var all_pokemon = []
-	for generation in pokemon_names.keys():
-		all_pokemon += pokemon_names[generation]
-	return all_pokemon
-
-# This function selects a single random Pokémon from the combined list of all Pokémon
-func get_random_pokemon_from_all() -> String:
-	var all_pokemon = get_all_pokemon()
-	if all_pokemon.size() > 0:
-		return all_pokemon[randi() % all_pokemon.size()]
-	return ""
 
 var pokemon_names = {
 	"gen1": [
