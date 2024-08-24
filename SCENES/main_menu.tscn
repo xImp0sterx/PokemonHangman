@@ -1,0 +1,145 @@
+[gd_scene load_steps=17 format=3 uid="uid://d30vkxxbkja2y"]
+
+[ext_resource type="Script" path="res://SCRIPTS/main_menu.gd" id="1_obp8k"]
+[ext_resource type="Texture2D" uid="uid://bnbnaujvf5bic" path="res://ASSETS/ART/UI/new_new_pokemon_logo.png" id="1_ug2yu"]
+[ext_resource type="Script" path="res://SCRIPTS/hangman_text.gd" id="2_3pknk"]
+[ext_resource type="Shader" path="res://SCRIPTS/main_menu.gdshader" id="2_g7mtl"]
+[ext_resource type="Texture2D" uid="uid://crlddylnp01h7" path="res://ASSETS/ART/UI/PokemonBackground.png" id="3_6xvkq"]
+[ext_resource type="Texture2D" uid="uid://cag4er0cx1bui" path="res://ASSETS/ART/UI/MenuPics/LargeButton/UI-01.png" id="3_cqxee"]
+[ext_resource type="Texture2D" uid="uid://c6pkkfa8xny86" path="res://ASSETS/ART/UI/MenuPics/LargeButton/UI-04.png" id="4_sshbf"]
+[ext_resource type="Texture2D" uid="uid://cauqxaxpr5c48" path="res://ASSETS/ART/UI/MenuPics/LargeButton/UI-03.png" id="5_jiojm"]
+[ext_resource type="Texture2D" uid="uid://cjqwywujpqqe3" path="res://ASSETS/ART/UI/MenuPics/SmallButtonsIcons/Arrows/UI-42.png" id="6_o1hcw"]
+[ext_resource type="Texture2D" uid="uid://o18wli1s0q5p" path="res://ASSETS/ART/UI/MenuPics/SmallButtonsIcons/Arrows/UI-79.png" id="7_606cn"]
+[ext_resource type="Texture2D" uid="uid://cx2vwkedklsyv" path="res://ASSETS/ART/UI/MenuPics/SmallButtonsIcons/Arrows/UI-43.png" id="8_7s0b0"]
+[ext_resource type="Texture2D" uid="uid://b3o7j4we40qyc" path="res://ASSETS/ART/UI/MenuPics/SmallButtonsIcons/Config/UI-102.png" id="9_benu8"]
+[ext_resource type="Texture2D" uid="uid://c8odksc4d4dbf" path="res://ASSETS/ART/UI/MenuPics/SmallButtonsIcons/Config/UI-105.png" id="10_l688q"]
+[ext_resource type="Texture2D" uid="uid://bk1paoobvwy3y" path="res://ASSETS/ART/UI/MenuPics/SmallButtonsIcons/Config/UI-104.png" id="11_057c2"]
+[ext_resource type="AudioStream" uid="uid://du48mp202lfci" path="res://ASSETS/SOUNDS/MainMenu.mp3" id="15_ygtyw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gjabp"]
+shader = ExtResource("2_g7mtl")
+shader_parameter/speed = 0.1
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_obp8k")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.341176, 1, 1)
+
+[node name="PokemonScrolling" type="TextureRect" parent="."]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("ShaderMaterial_gjabp")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_6xvkq")
+
+[node name="PokemonLogo" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -250.0
+offset_right = 250.0
+offset_bottom = 281.0
+grow_horizontal = 2
+texture = ExtResource("1_ug2yu")
+
+[node name="HangmanText" type="Label" parent="."]
+modulate = Color(1, 0.8, 0, 1)
+layout_mode = 0
+offset_left = 485.0
+offset_top = 228.0
+offset_right = 828.0
+offset_bottom = 333.0
+theme_override_font_sizes/font_size = 50
+text = "HANGMAN"
+horizontal_alignment = 1
+uppercase = true
+script = ExtResource("2_3pknk")
+
+[node name="PlayButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -181.0
+offset_top = 85.0
+offset_right = 612.0
+offset_bottom = 291.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("3_cqxee")
+texture_pressed = ExtResource("4_sshbf")
+texture_hover = ExtResource("5_jiojm")
+
+[node name="Label" type="Label" parent="PlayButton"]
+modulate = Color(0, 0.341176, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 120
+text = "PLAY"
+horizontal_alignment = 1
+
+[node name="ExitButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 590.0
+offset_right = 226.0
+offset_bottom = 795.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("6_o1hcw")
+texture_pressed = ExtResource("7_606cn")
+texture_hover = ExtResource("8_7s0b0")
+
+[node name="SettingsButton" type="TextureButton" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 1153.0
+offset_top = 588.0
+offset_right = 1358.0
+offset_bottom = 794.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("9_benu8")
+texture_pressed = ExtResource("10_l688q")
+texture_hover = ExtResource("11_057c2")
+
+[node name="HighscoreLabel" type="Label" parent="."]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+offset_right = 318.0
+offset_bottom = 75.0
+theme_override_font_sizes/font_size = 50
+text = "HIGHSCORE: 0"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_ygtyw")
+volume_db = -5.651
+pitch_scale = 0.5
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]

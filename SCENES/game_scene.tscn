@@ -1,0 +1,856 @@
+[gd_scene load_steps=13 format=3 uid="uid://brkrpjhriuoj3"]
+
+[ext_resource type="Script" path="res://SCRIPTS/game_scene.gd" id="1_wg3e7"]
+[ext_resource type="Texture2D" uid="uid://c6pkkfa8xny86" path="res://ASSETS/ART/UI/MenuPics/LargeButton/UI-04.png" id="2_ida5r"]
+[ext_resource type="Texture2D" uid="uid://bh4jnbnwmglfm" path="res://ASSETS/ART/UI/MenuPics/SmallButtons/UI-1.png" id="3_ulpsk"]
+[ext_resource type="Texture2D" uid="uid://cgxnwxjteni4k" path="res://ASSETS/ART/UI/MenuPics/SmallButtons/UI-4.png" id="4_hwiek"]
+[ext_resource type="Texture2D" uid="uid://db3prx1150oe6" path="res://ASSETS/ART/UI/MenuPics/SmallButtons/UI-3.png" id="5_w6eeo"]
+[ext_resource type="Texture2D" uid="uid://b03linguh7xx2" path="res://ASSETS/ART/UI/Noose/hangman0.png" id="6_clwtx"]
+[ext_resource type="Texture2D" uid="uid://676qvagiu1u5" path="res://ASSETS/ART/POKEMON/normal/abomasnow.png" id="7_ta8m8"]
+[ext_resource type="PackedScene" uid="uid://dsdesm7tpe0so" path="res://SCENES/transition_effect.tscn" id="8_3mtfc"]
+[ext_resource type="AudioStream" uid="uid://b2rnh0yroe3uy" path="res://ASSETS/SOUNDS/ShinySound.ogg" id="9_4jn38"]
+
+[sub_resource type="Animation" id="Animation_nbaxy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_d7nrr"]
+resource_name = "reveal"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0.454524, 0.454524, 0.454524, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1o314"]
+_data = {
+"RESET": SubResource("Animation_nbaxy"),
+"reveal": SubResource("Animation_d7nrr")
+}
+
+[node name="GameScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wg3e7")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.341176, 1, 1)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = -14.0
+offset_bottom = 196.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 0.92)
+texture = ExtResource("2_ida5r")
+
+[node name="PokedexLabel" type="Label" parent="Control/TextureRect"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 24.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.96, 0.84)
+theme_override_font_sizes/font_size = 30
+text = "A strange seed was planted on its back at birth. The plant sprouts and grows with this Pokémon."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ButtonsContainer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ButtonA" type="TextureButton" parent="ButtonsContainer"]
+layout_mode = 2
+offset_left = 24.0
+offset_top = -184.0
+offset_right = 229.0
+offset_bottom = 21.0
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("3_ulpsk")
+texture_pressed = ExtResource("4_hwiek")
+texture_hover = ExtResource("5_w6eeo")
+
+[node name="Label" type="Label" parent="ButtonsContainer/ButtonA"]
+modulate = Color(0, 0.341176, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 150
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonB" type="TextureButton" parent="ButtonsContainer"]
+layout_mode = 2
+offset_left = 120.0
+offset_top = -184.0
+offset_right = 325.0
+offset_bottom = 21.0
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("3_ulpsk")
+texture_pressed = ExtResource("4_hwiek")
+texture_hover = ExtResource("5_w6eeo")
+
+[node name="Label" type="Label" parent="ButtonsContainer/ButtonB"]
+modulate = Color(0, 0.341176, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 150
+text = "B"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonC" type="TextureButton" parent="ButtonsContainer"]
+layout_mode = 2
+offset_left = 216.0
+offset_top = -184.0
+offset_right = 421.0
+offset_bottom = 21.0
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("3_ulpsk")
+texture_pressed = ExtResource("4_hwiek")
+texture_hover = ExtResource("5_w6eeo")
+
+[node name="Label" type="Label" parent="ButtonsContainer/ButtonC"]
+modulate = Color(0, 0.341176, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 150
+text = "C"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonD" type="TextureButton" parent="ButtonsContainer"]
+layout_mode = 2
+offset_left = 312.0
+offset_top = -184.0
+offset_right = 517.0
+offset_bottom = 21.0
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("3_ulpsk")
+texture_pressed = ExtResource("4_hwiek")
+texture_hover = ExtResource("5_w6eeo")
+
+[node name="Label" type="Label" parent="ButtonsContainer/ButtonD"]
+modulate = Color(0, 0.341176, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 150
+text = "D"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonE" type="TextureButton" parent="ButtonsContainer"]
+layout_mode = 2
+offset_left = 408.0
+offset_top = -184.0
+offset_right = 613.0
+offset_bottom = 21.0
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("3_ulpsk")
+texture_pressed = ExtResource("4_hwiek")
+texture_hover = ExtResource("5_w6eeo")
+
+[node name="Label" type="Label" parent="ButtonsContainer/ButtonE"]
+modulate = Color(0, 0.341176, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 150
+text = "E"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonF" type="TextureButton" parent="ButtonsContainer"]
+layout_mode = 2
+offset_left = 504.0
+offset_top = -184.0
+offset_right = 709.0
+offset_bottom = 21.0
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("3_ulpsk")
+texture_pressed = ExtResource("4_hwiek")
+texture_hover = ExtResource("5_w6eeo")
+
+[node name="Label" type="Label" parent="ButtonsContainer/ButtonF"]
+modulate = Color(0, 0.341176, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 150
+text = "F"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonG" type="TextureButton" parent="ButtonsContainer"]
+layout_mode = 2
+offset_left = 600.0
+offset_top = -184.0
+offset_right = 805.0
+offset_bottom = 21.0
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("3_ulpsk")
+texture_pressed = ExtResource("4_hwiek")
+texture_hover = ExtResource("5_w6eeo")
+
+[node name="Label" type="Label" parent="ButtonsContainer/ButtonG"]
+modulate = Color(0, 0.341176, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 150
+text = "G"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonH" type="TextureButton" parent="ButtonsContainer"]
+layout_mode = 2
+offset_left = 696.0
+offset_top = -184.0
+offset_right = 901.0
+offset_bottom = 21.0
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("3_ulpsk")
+texture_pressed = ExtResource("4_hwiek")
+texture_hover = ExtResource("5_w6eeo")
+
+[node name="Label" type="Label" parent="ButtonsContainer/ButtonH"]
+modulate = Color(0, 0.341176, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 150
+text = "H"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonI" type="TextureButton" parent="ButtonsContainer"]
+layout_mode = 2
+offset_left = 792.0
+offset_top = -184.0
+offset_right = 997.0
+offset_bottom = 21.0
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("3_ulpsk")
+texture_pressed = ExtResource("4_hwiek")
+texture_hover = ExtResource("5_w6eeo")
+
+[node name="Label" type="Label" parent="ButtonsContainer/ButtonI"]
+modulate = Color(0, 0.341176, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 150
+text = "I"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonJ" type="TextureButton" parent="ButtonsContainer"]
+layout_mode = 2
+offset_left = 888.0
+offset_top = -184.0
+offset_right = 1093.0
+offset_bottom = 21.0
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("3_ulpsk")
+texture_pressed = ExtResource("4_hwiek")
+texture_hover = ExtResource("5_w6eeo")
+
+[node name="Label" type="Label" parent="ButtonsContainer/ButtonJ"]
+modulate = Color(0, 0.341176, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 150
+text = "J"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonK" type="TextureButton" parent="ButtonsContainer"]
+layout_mode = 2
+offset_left = 984.0
+offset_top = -184.0
+offset_right = 1189.0
+offset_bottom = 21.0
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("3_ulpsk")
+texture_pressed = ExtResource("4_hwiek")
+texture_hover = ExtResource("5_w6eeo")
+
+[node name="Label" type="Label" parent="ButtonsContainer/ButtonK"]
+modulate = Color(0, 0.341176, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 150
+text = "K"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonL" type="TextureButton" parent="ButtonsContainer"]
+layout_mode = 2
+offset_left = 1080.0
+offset_top = -184.0
+offset_right = 1285.0
+offset_bottom = 21.0
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("3_ulpsk")
+texture_pressed = ExtResource("4_hwiek")
+texture_hover = ExtResource("5_w6eeo")
+
+[node name="Label" type="Label" parent="ButtonsContainer/ButtonL"]
+modulate = Color(0, 0.341176, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 150
+text = "L"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonM" type="TextureButton" parent="ButtonsContainer"]
+layout_mode = 2
+offset_left = 1176.0
+offset_top = -184.0
+offset_right = 1381.0
+offset_bottom = 21.0
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("3_ulpsk")
+texture_pressed = ExtResource("4_hwiek")
+texture_hover = ExtResource("5_w6eeo")
+
+[node name="Label" type="Label" parent="ButtonsContainer/ButtonM"]
+modulate = Color(0, 0.341176, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 150
+text = "M"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonN" type="TextureButton" parent="ButtonsContainer"]
+layout_mode = 2
+offset_left = 24.0
+offset_top = -96.0
+offset_right = 229.0
+offset_bottom = 109.0
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("3_ulpsk")
+texture_pressed = ExtResource("4_hwiek")
+texture_hover = ExtResource("5_w6eeo")
+
+[node name="Label" type="Label" parent="ButtonsContainer/ButtonN"]
+modulate = Color(0, 0.341176, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 150
+text = "N"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonO" type="TextureButton" parent="ButtonsContainer"]
+layout_mode = 2
+offset_left = 120.0
+offset_top = -96.0
+offset_right = 325.0
+offset_bottom = 109.0
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("3_ulpsk")
+texture_pressed = ExtResource("4_hwiek")
+texture_hover = ExtResource("5_w6eeo")
+
+[node name="Label" type="Label" parent="ButtonsContainer/ButtonO"]
+modulate = Color(0, 0.341176, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 150
+text = "O"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonP" type="TextureButton" parent="ButtonsContainer"]
+layout_mode = 2
+offset_left = 216.0
+offset_top = -96.0
+offset_right = 421.0
+offset_bottom = 109.0
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("3_ulpsk")
+texture_pressed = ExtResource("4_hwiek")
+texture_hover = ExtResource("5_w6eeo")
+
+[node name="Label" type="Label" parent="ButtonsContainer/ButtonP"]
+modulate = Color(0, 0.341176, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 150
+text = "P"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonQ" type="TextureButton" parent="ButtonsContainer"]
+layout_mode = 2
+offset_left = 312.0
+offset_top = -96.0
+offset_right = 517.0
+offset_bottom = 109.0
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("3_ulpsk")
+texture_pressed = ExtResource("4_hwiek")
+texture_hover = ExtResource("5_w6eeo")
+
+[node name="Label" type="Label" parent="ButtonsContainer/ButtonQ"]
+modulate = Color(0, 0.341176, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 150
+text = "Q"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonR" type="TextureButton" parent="ButtonsContainer"]
+layout_mode = 2
+offset_left = 408.0
+offset_top = -96.0
+offset_right = 613.0
+offset_bottom = 109.0
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("3_ulpsk")
+texture_pressed = ExtResource("4_hwiek")
+texture_hover = ExtResource("5_w6eeo")
+
+[node name="Label" type="Label" parent="ButtonsContainer/ButtonR"]
+modulate = Color(0, 0.341176, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 150
+text = "R"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonS" type="TextureButton" parent="ButtonsContainer"]
+layout_mode = 2
+offset_left = 504.0
+offset_top = -96.0
+offset_right = 709.0
+offset_bottom = 109.0
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("3_ulpsk")
+texture_pressed = ExtResource("4_hwiek")
+texture_hover = ExtResource("5_w6eeo")
+
+[node name="Label" type="Label" parent="ButtonsContainer/ButtonS"]
+modulate = Color(0, 0.341176, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 150
+text = "S"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonT" type="TextureButton" parent="ButtonsContainer"]
+layout_mode = 2
+offset_left = 600.0
+offset_top = -95.9999
+offset_right = 805.0
+offset_bottom = 109.0
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("3_ulpsk")
+texture_pressed = ExtResource("4_hwiek")
+texture_hover = ExtResource("5_w6eeo")
+
+[node name="Label" type="Label" parent="ButtonsContainer/ButtonT"]
+modulate = Color(0, 0.341176, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 150
+text = "T"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonU" type="TextureButton" parent="ButtonsContainer"]
+layout_mode = 2
+offset_left = 696.0
+offset_top = -95.9999
+offset_right = 901.0
+offset_bottom = 109.0
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("3_ulpsk")
+texture_pressed = ExtResource("4_hwiek")
+texture_hover = ExtResource("5_w6eeo")
+
+[node name="Label" type="Label" parent="ButtonsContainer/ButtonU"]
+modulate = Color(0, 0.341176, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 150
+text = "U"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonV" type="TextureButton" parent="ButtonsContainer"]
+layout_mode = 2
+offset_left = 792.0
+offset_top = -95.9999
+offset_right = 997.0
+offset_bottom = 109.0
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("3_ulpsk")
+texture_pressed = ExtResource("4_hwiek")
+texture_hover = ExtResource("5_w6eeo")
+
+[node name="Label" type="Label" parent="ButtonsContainer/ButtonV"]
+modulate = Color(0, 0.341176, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 150
+text = "V"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonW" type="TextureButton" parent="ButtonsContainer"]
+layout_mode = 2
+offset_left = 888.0
+offset_top = -95.9999
+offset_right = 1093.0
+offset_bottom = 109.0
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("3_ulpsk")
+texture_pressed = ExtResource("4_hwiek")
+texture_hover = ExtResource("5_w6eeo")
+
+[node name="Label" type="Label" parent="ButtonsContainer/ButtonW"]
+modulate = Color(0, 0.341176, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 150
+text = "W"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonX" type="TextureButton" parent="ButtonsContainer"]
+layout_mode = 2
+offset_left = 984.0
+offset_top = -95.9999
+offset_right = 1189.0
+offset_bottom = 109.0
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("3_ulpsk")
+texture_pressed = ExtResource("4_hwiek")
+texture_hover = ExtResource("5_w6eeo")
+
+[node name="Label" type="Label" parent="ButtonsContainer/ButtonX"]
+modulate = Color(0, 0.341176, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 150
+text = "X"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonY" type="TextureButton" parent="ButtonsContainer"]
+layout_mode = 2
+offset_left = 1080.0
+offset_top = -95.9999
+offset_right = 1285.0
+offset_bottom = 109.0
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("3_ulpsk")
+texture_pressed = ExtResource("4_hwiek")
+texture_hover = ExtResource("5_w6eeo")
+
+[node name="Label" type="Label" parent="ButtonsContainer/ButtonY"]
+modulate = Color(0, 0.341176, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 150
+text = "Y"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonZ" type="TextureButton" parent="ButtonsContainer"]
+layout_mode = 2
+offset_left = 1176.0
+offset_top = -95.9999
+offset_right = 1381.0
+offset_bottom = 109.0
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("3_ulpsk")
+texture_pressed = ExtResource("4_hwiek")
+texture_hover = ExtResource("5_w6eeo")
+
+[node name="Label" type="Label" parent="ButtonsContainer/ButtonZ"]
+modulate = Color(0, 0.341176, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 150
+text = "Z"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HangmansNoose" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 16.0
+offset_top = -160.0
+offset_right = 225.0
+offset_bottom = 56.0
+grow_vertical = 2
+scale = Vector2(1.4, 1.4)
+texture = ExtResource("6_clwtx")
+
+[node name="PokemonNameLabel" type="Label" parent="."]
+layout_mode = 2
+offset_left = 368.0
+offset_top = 336.0
+offset_right = 841.0
+offset_bottom = 486.0
+theme_override_font_sizes/font_size = 100
+text = "_________"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PokemonImage" type="TextureRect" parent="."]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -200.0
+offset_right = 152.0
+offset_bottom = 312.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("7_ta8m8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PokemonImage"]
+libraries = {
+"": SubResource("AnimationLibrary_1o314")
+}
+
+[node name="HighscoreLabel" type="Label" parent="."]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 448.0
+offset_top = 200.0
+offset_right = 627.0
+offset_bottom = 245.0
+theme_override_font_sizes/font_size = 30
+text = "High Score: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentScoreLabel" type="Label" parent="."]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 648.0
+offset_top = 200.0
+offset_right = 867.0
+offset_bottom = 245.0
+theme_override_font_sizes/font_size = 30
+text = "Current Score: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GuessesLeftLabel" type="Label" parent="."]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 536.0
+offset_top = 488.0
+offset_right = 737.0
+offset_bottom = 533.0
+theme_override_font_sizes/font_size = 30
+text = "Guesses Left: 6"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="TransitionEffect" parent="." instance=ExtResource("8_3mtfc")]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_4jn38")
+
+[connection signal="pressed" from="ButtonsContainer/ButtonA" to="." method="_on_button_a_pressed"]
+[connection signal="pressed" from="ButtonsContainer/ButtonB" to="." method="_on_button_b_pressed"]
+[connection signal="pressed" from="ButtonsContainer/ButtonC" to="." method="_on_button_c_pressed"]
+[connection signal="pressed" from="ButtonsContainer/ButtonD" to="." method="_on_button_d_pressed"]
+[connection signal="pressed" from="ButtonsContainer/ButtonE" to="." method="_on_button_e_pressed"]
+[connection signal="pressed" from="ButtonsContainer/ButtonF" to="." method="_on_button_f_pressed"]
+[connection signal="pressed" from="ButtonsContainer/ButtonG" to="." method="_on_button_g_pressed"]
+[connection signal="pressed" from="ButtonsContainer/ButtonH" to="." method="_on_button_h_pressed"]
+[connection signal="pressed" from="ButtonsContainer/ButtonI" to="." method="_on_button_i_pressed"]
+[connection signal="pressed" from="ButtonsContainer/ButtonJ" to="." method="_on_button_j_pressed"]
+[connection signal="pressed" from="ButtonsContainer/ButtonK" to="." method="_on_button_k_pressed"]
+[connection signal="pressed" from="ButtonsContainer/ButtonL" to="." method="_on_button_l_pressed"]
+[connection signal="pressed" from="ButtonsContainer/ButtonM" to="." method="_on_button_m_pressed"]
+[connection signal="pressed" from="ButtonsContainer/ButtonN" to="." method="_on_button_n_pressed"]
+[connection signal="pressed" from="ButtonsContainer/ButtonO" to="." method="_on_button_o_pressed"]
+[connection signal="pressed" from="ButtonsContainer/ButtonP" to="." method="_on_button_p_pressed"]
+[connection signal="pressed" from="ButtonsContainer/ButtonQ" to="." method="_on_button_q_pressed"]
+[connection signal="pressed" from="ButtonsContainer/ButtonR" to="." method="_on_button_r_pressed"]
+[connection signal="pressed" from="ButtonsContainer/ButtonS" to="." method="_on_button_s_pressed"]
+[connection signal="pressed" from="ButtonsContainer/ButtonT" to="." method="_on_button_t_pressed"]
+[connection signal="pressed" from="ButtonsContainer/ButtonU" to="." method="_on_button_u_pressed"]
+[connection signal="pressed" from="ButtonsContainer/ButtonV" to="." method="_on_button_v_pressed"]
+[connection signal="pressed" from="ButtonsContainer/ButtonW" to="." method="_on_button_w_pressed"]
+[connection signal="pressed" from="ButtonsContainer/ButtonX" to="." method="_on_button_x_pressed"]
+[connection signal="pressed" from="ButtonsContainer/ButtonY" to="." method="_on_button_y_pressed"]
+[connection signal="pressed" from="ButtonsContainer/ButtonZ" to="." method="_on_button_z_pressed"]
